@@ -1,0 +1,7 @@
+
+relation UserLongTx {
+    .pt.ist.fenixframework.longtx.TransactionalContext playsRole longTransaction {
+        multiplicity *;
+    }
+    .pt.ist.bennu.core.domain.User playsRole owner;
+}
