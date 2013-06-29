@@ -6,7 +6,8 @@ define({
         "operations": "Operações",
         "commit": "Confirmar",
         "rollback": "Anular",
-        "activate": "Activar"
+        "activate": "Activar",
+        "deactivate": "Desactivar"
     },
-    'pt-pt': true
+    'en-us': true
 });

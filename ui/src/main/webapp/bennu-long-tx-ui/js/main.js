@@ -15,15 +15,25 @@ requirejs.config({
             deps: ["jquery", "underscore"],
             exports: "Backbone"
         },
+    }, 
+    config: {
+        i18n: {
+            'locale': BennuPortal.locale.tag.toLowerCase()
+        }
     }
 });
 
-require(['backbone','knockout', 'bennu-knockout', 'router'], function(Backbone, ko, bennuKo, Router) {
+require(['backbone','knockout', 'bennu-knockout'], function(Backbone, ko, bennuKo) {
 
 	setTimeout(function () {
 		bennuKo.initialize();
-		new Router();
-		Backbone.history.start();
+        bennuKo.LoadPage({
+            transactions: ko.observable([{ 'description' : 'blah blah', selected: false}, { description: 'bleh bleh', selected: true}]),
+            description: ko.observable(''),
+            create: function() {
+                alert("Creating with description " + description());
+            }
+        }, "LongTxManagement");
 	}, 500);
 
 });

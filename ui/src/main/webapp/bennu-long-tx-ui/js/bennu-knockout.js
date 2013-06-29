@@ -18,10 +18,13 @@ define(['jquery', 'knockout', 'i18n!nls/messages'], function($, ko, messages) {
 		});
 	};
 
+	var appName = ko.observable(undefined);
+
 	ko.bindingHandlers.app = {
 	    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 	        // This will be called when the binding is first applied to an element
 	        // Set up any initial state, event handlers, etc. here
+			appName(valueAccessor());
 			$(element).append("<div id='bennu-ko-container'></div>");
 	    },
 	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -56,6 +59,8 @@ define(['jquery', 'knockout', 'i18n!nls/messages'], function($, ko, messages) {
 
 	return {
 
+		'appName': appName,
+
 		LoadPage: function(viewModel, template) {
 			templateModel.selectedViewModel(viewModel);
 			templateModel.template(template);
@@ -63,6 +68,7 @@ define(['jquery', 'knockout', 'i18n!nls/messages'], function($, ko, messages) {
 
 		initialize: function() {
 			ko.applyBindings(templateModel);
+			console.log("Successfully initialized bennu-knockout app '" + appName() + "'");
 		}
 
 	};
