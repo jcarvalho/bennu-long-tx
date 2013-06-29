@@ -1,0 +1,18 @@
+<table class="table table-condensed table-stripped">
+	<thead>
+		<tr>
+			<th data-bind="i18n: 'description'"/>
+			<th data-bind="i18n: 'operations'" />
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: transactions">
+		<td data-bind="text: description" />
+		<td>
+			<button class="btn btn-success btn-mini" data-bind="i18n: 'commit'" />
+			<button class="btn btn-danger btn-mini" data-bind="i18n: 'rollback'" />
+			<button class="btn btn-info btn-mini" data-bind="i18n: 'activate'" />
+		</td>
+	</tbody>
+</table>
+
+<a class="btn btn-primary btn-mini pull-right" href="#create" data-bind="i18n: 'create'"></a>
