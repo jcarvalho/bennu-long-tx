@@ -9,10 +9,10 @@
 		<tr data-bind="css: { success: selected }">
 			<td data-bind="text: description" />
 			<td>
-				<button class="btn btn-success btn-mini" data-bind="i18n: 'commit'" />
-				<button class="btn btn-danger btn-mini" data-bind="i18n: 'rollback'" />
+				<button class="btn btn-success btn-mini" data-bind="i18n: 'commit', visible: !selected" />
+				<button class="btn btn-danger btn-mini" data-bind="i18n: 'rollback', visible: !selected" />
 				<button class="btn btn-info btn-mini" data-bind="i18n: 'activate', visible: !selected" />
-				<button class="btn btn-info btn-mini" data-bind="i18n: 'deactivate', visible: selected" />
+				<button class="btn btn-warning btn-mini" data-bind="i18n: 'deactivate', visible: selected" />
 			</td>
 		</tr>
 	</tbody>

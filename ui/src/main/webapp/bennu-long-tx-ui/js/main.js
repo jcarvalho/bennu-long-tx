@@ -1,39 +1,41 @@
-requirejs.config({
-    paths: {
-        jquery: 'libs/jquery',
-        i18n: 'libs/i18n',
-        backbone: 'libs/backbone',
-        underscore: 'libs/underscore',
-        knockout: 'libs/knockout'
-    },
-    shim: {
-        "underscore": {
-            deps: [],
-            exports: "_"
-        },
-        "backbone": {
-            deps: ["jquery", "underscore"],
-            exports: "Backbone"
-        },
-    }, 
-    config: {
-        i18n: {
-            'locale': BennuPortal.locale.tag.toLowerCase()
-        }
-    }
-});
+BennuPortalInitializer.registerCallback(function (portal) {
 
-require(['backbone','knockout', 'bennu-knockout'], function(Backbone, ko, bennuKo) {
-
-	setTimeout(function () {
-		bennuKo.initialize();
-        bennuKo.LoadPage({
-            transactions: ko.observable([{ 'description' : 'blah blah', selected: false}, { description: 'bleh bleh', selected: true}]),
-            description: ko.observable(''),
-            create: function() {
-                alert("Creating with description " + description());
+    requirejs.config({
+        paths: {
+            jquery: 'libs/jquery',
+            i18n: 'libs/i18n',
+            backbone: 'libs/backbone',
+            underscore: 'libs/underscore',
+            knockout: 'libs/knockout'
+        },
+        shim: {
+            "underscore": {
+                deps: [],
+                exports: "_"
+            },
+            "backbone": {
+                deps: ["jquery", "underscore"],
+                exports: "Backbone"
+            },
+        }, 
+        config: {
+            i18n: {
+                'locale': portal.locale.tag.toLowerCase()
             }
-        }, "LongTxManagement");
-	}, 500);
+        }
+    });
+
+    require(['backbone','knockout', 'bennu-knockout'], function(Backbone, ko, bennuKo) {
+
+    		bennuKo.initialize();
+            bennuKo.LoadPage({
+                transactions: ko.observable([{ 'description' : 'blah blah', selected: false}, { description: 'bleh bleh', selected: true}]),
+                description: ko.observable(''),
+                create: function() {
+                    alert("Creating with description " + description());
+                }
+            }, "LongTxManagement");
+
+    });
 
 });
