@@ -1,12 +1,5 @@
 requirejs.config({
     paths: {
-
-        // bennu-knockout dependencies
-        jquery: '../../bennu-knockout/libs/jquery',
-        i18n: '../../bennu-knockout/libs/i18n',
-        knockout: '../../bennu-knockout/libs/knockout',
-        'bennu-knockout': '../../bennu-knockout/bennu-knockout',
-        
         // Backbone
         backbone: 'libs/backbone',
         underscore: 'libs/underscore',
