@@ -7,11 +7,11 @@
 	</thead>
 	<tbody data-bind="foreach: transactions">
 		<tr data-bind="css: { success: selected }">
-			<td data-bind="text: description" />
+			<td data-bind="text: name" />
 			<td>
-				<button class="btn btn-success btn-mini" data-bind="i18n: 'commit', visible: !selected" />
-				<button class="btn btn-danger btn-mini" data-bind="i18n: 'rollback', visible: !selected" />
-				<button class="btn btn-info btn-mini" data-bind="i18n: 'activate', visible: !selected" />
+				<button class="btn btn-success btn-mini" data-bind="i18n: 'commit', visible: !selected()" />
+				<button class="btn btn-danger btn-mini" data-bind="i18n: 'rollback', visible: !selected()" />
+				<button class="btn btn-info btn-mini" data-bind="i18n: 'activate', visible: !selected()" />
 				<button class="btn btn-warning btn-mini" data-bind="i18n: 'deactivate', visible: selected" />
 			</td>
 		</tr>
@@ -32,6 +32,6 @@
 		<input type="text" placeholder="Description" data-bind="value: description, valueUpdate: 'afterkeydown'" />
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-primary" data-bind="i18n: 'create', enable: description().length > 0, click: create"></button>
+		<button class="btn btn-primary" data-bind="i18n: 'create', enable: description().length > 0, click: create" data-dismiss="modal"></button>
 	</div>
 </div>

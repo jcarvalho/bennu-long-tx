@@ -12,11 +12,16 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pt.ist.fenixframework.longtx.LongTransaction;
 import pt.ist.fenixframework.longtx.TransactionalContext;
 
-@WebFilter(urlPatterns = "*")
+@WebFilter(urlPatterns = "/api/*")
 public class LongTxFilter implements Filter {
+
+    private static final Logger logger = LoggerFactory.getLogger(LongTxFilter.class);
 
     public static final String LONG_TX_SESSION_PARAM = "__LONG_TX__";
 
@@ -28,17 +33,19 @@ public class LongTxFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
-        System.out.println("Filtro!");
         HttpSession session = ((HttpServletRequest) request).getSession(false);
         TransactionalContext context =
                 session == null ? null : (TransactionalContext) session.getAttribute(LONG_TX_SESSION_PARAM);
         if (context == null) {
+            logger.debug("Chaining request with no Transactional Context");
             chain.doFilter(request, response);
         } else {
             try {
+                logger.debug("Setting Transactional Context for thread: {}", context);
                 LongTransaction.setContextForThread(context);
                 chain.doFilter(request, response);
             } finally {
+                logger.debug("Removing Transactional Context from thread");
                 LongTransaction.removeContextFromThread();
             }
         }

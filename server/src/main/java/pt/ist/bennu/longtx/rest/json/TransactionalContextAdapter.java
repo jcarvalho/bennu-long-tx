@@ -4,6 +4,7 @@ import pt.ist.bennu.core.annotation.DefaultJsonAdapter;
 import pt.ist.bennu.json.JsonBuilder;
 import pt.ist.bennu.json.JsonCreator;
 import pt.ist.bennu.json.JsonViewer;
+import pt.ist.fenixframework.longtx.LongTransaction;
 import pt.ist.fenixframework.longtx.TransactionalContext;
 
 import com.google.gson.JsonElement;
@@ -23,7 +24,12 @@ public class TransactionalContextAdapter implements JsonCreator<TransactionalCon
         JsonObject json = new JsonObject();
         json.addProperty("id", context.getExternalId());
         json.addProperty("name", context.getName());
+        json.addProperty("selected", isSelected(context));
         return json;
+    }
+
+    private static boolean isSelected(TransactionalContext context) {
+        return context == LongTransaction.getContextForThread();
     }
 
 }
