@@ -1,0 +1,12 @@
+<div id="create" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: function() { description('') }">×</button>
+		<h3 data-bind="i18n: 'create'"></h3>
+	</div>
+	<div class="modal-body">
+		<input type="text" placeholder="Description" data-bind="value: description, valueUpdate: 'afterkeydown'" />
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" data-bind="i18n: 'create', enable: description().length > 0, click: create" data-dismiss="modal"></button>
+	</div>
+</div>

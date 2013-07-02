@@ -1,61 +1,51 @@
 define(['jquery', 'knockout', 'knockback', 'models/TransactionalContextModel'], function ($, ko, kb, TransactionalContextModel) {
 
-	return function(TransactionalContextCollection) {
+    return function(TransactionalContextCollection) {
 
-		this.transactions = kb.collectionObservable(TransactionalContextCollection, kb.ViewModel);
-		this.description = ko.observable('');
-        this.create = function() {
-        	var model = new TransactionalContextModel({ name: this.description() });
-        	model.save(null, {
-        		success: function() {
-        			TransactionalContextCollection.add(model);
-        		}
-        	});
-        };
+        this.transactions = kb.collectionObservable(TransactionalContextCollection, kb.ViewModel);
 
         this.commit = function(model) {
-        	$.ajax({
-        		type: 'GET',
-        		url: '../api/bennu-long-tx/longTx/commit/' + model.model().get('id'),
-        		success: function() {
-        			alert("SUCCESS!");
-        			TransactionalContextCollection.remove(model.model());
-        		}
-        	});
+            $.ajax({
+                type: 'GET',
+                url: '../api/bennu-long-tx/longTx/commit/' + model.model().get('id'),
+                success: function() {
+                    TransactionalContextCollection.remove(model.model());
+                }
+            });
         };
 
         this.rollback = function(model) {
-        	$.ajax({
-        		type: 'GET',
-        		dataType: 'text',
-        		url: '../api/bennu-long-tx/longTx/rollback/' + model.model().get('id'),
-        		success: function() {
-        			TransactionalContextCollection.remove(model.model());
-        		}
-        	});
+            $.ajax({
+                type: 'GET',
+                dataType: 'text',
+                url: '../api/bennu-long-tx/longTx/rollback/' + model.model().get('id'),
+                success: function() {
+                    TransactionalContextCollection.remove(model.model());
+                }
+            });
         };
 
         this.activate = function(model) {
-        	$.ajax({
-        		type: 'GET',
-        		dataType: 'text',
-        		url: '../api/bennu-long-tx/longTx/activate/' + model.model().get('id'),
-        		success: function() {
-        			model.model().set('activated', true);
-        		}
-        	});
+            $.ajax({
+                type: 'GET',
+                dataType: 'text',
+                url: '../api/bennu-long-tx/longTx/activate/' + model.model().get('id'),
+                success: function() {
+                    model.model().set('activated', true);
+                }
+            });
         };
 
         this.deactivate = function(model) {
-        	$.ajax({
-        		type: 'GET',
-        		dataType: 'text',
-        		url: '../api/bennu-long-tx/longTx/deactivate',
-        		success: function() {
-        			model.model().set('activated', false);
-        		}
-        	});
+            $.ajax({
+                type: 'GET',
+                dataType: 'text',
+                url: '../api/bennu-long-tx/longTx/deactivate',
+                success: function() {
+                    model.model().set('activated', false);
+                }
+            });
         };
-	}
+    }
 
 });

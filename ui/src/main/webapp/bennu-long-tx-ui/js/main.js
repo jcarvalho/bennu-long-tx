@@ -1,12 +1,16 @@
 requirejs.config({
     paths: {
+
+        // bennu-knockout dependencies
         jquery: '../../bennu-knockout/libs/jquery',
         i18n: '../../bennu-knockout/libs/i18n',
+        knockout: '../../bennu-knockout/libs/knockout',
+        'bennu-knockout': '../../bennu-knockout/bennu-knockout',
+        
+        // Backbone
         backbone: 'libs/backbone',
         underscore: 'libs/underscore',
-        knockout: '../../bennu-knockout/libs/knockout',
-        knockback: 'libs/knockback-core',
-        'bennu-knockout': '../../bennu-knockout/bennu-knockout'
+        knockback: 'libs/knockback-core'
     },
     shim: {
         "underscore": {
@@ -28,7 +32,8 @@ requirejs.config({
 require(['knockout', 
          'bennu-knockout',
          'collections/TransactionalContextCollection',
-         'viewModels/TransactionalContextViewModel'], function(ko, bennuKo, TrasactionalContextCollection, TransactionalContextViewModel) {
+         'viewModels/TransactionalContextViewModel',
+         'viewModels/NewTxViewModel'], function(ko, bennuKo, TrasactionalContextCollection, TransactionalContextViewModel, NewTxViewModel) {
 
 		bennuKo.initialize();
         var collection = new TrasactionalContextCollection();
@@ -36,7 +41,9 @@ require(['knockout',
             success: function () {
                 collection.sort();
                 var viewModel = new TransactionalContextViewModel(collection);
-                bennuKo.LoadPage(viewModel, 'LongTxManagement');
+                var modalViewModel = new NewTxViewModel(collection);
+                bennuKo.loadPage('mainView', viewModel, 'LongTxManagement');
+                bennuKo.loadPage('newTxModal', modalViewModel, 'NewTxModal');
             }
         });
 });
