@@ -19,6 +19,7 @@ define(['jquery', 'knockout', 'knockback', 'models/TransactionalContextModel'], 
         		url: '../api/bennu-long-tx/longTx/commit/' + model.model().get('id'),
         		success: function() {
         			alert("SUCCESS!");
+        			TransactionalContextCollection.remove(model.model());
         		}
         	});
         };
@@ -26,6 +27,7 @@ define(['jquery', 'knockout', 'knockback', 'models/TransactionalContextModel'], 
         this.rollback = function(model) {
         	$.ajax({
         		type: 'GET',
+        		dataType: 'text',
         		url: '../api/bennu-long-tx/longTx/rollback/' + model.model().get('id'),
         		success: function() {
         			TransactionalContextCollection.remove(model.model());
@@ -34,11 +36,25 @@ define(['jquery', 'knockout', 'knockback', 'models/TransactionalContextModel'], 
         };
 
         this.activate = function(model) {
-
+        	$.ajax({
+        		type: 'GET',
+        		dataType: 'text',
+        		url: '../api/bennu-long-tx/longTx/activate/' + model.model().get('id'),
+        		success: function() {
+        			model.model().set('activated', true);
+        		}
+        	});
         };
 
         this.deactivate = function(model) {
-
+        	$.ajax({
+        		type: 'GET',
+        		dataType: 'text',
+        		url: '../api/bennu-long-tx/longTx/deactivate',
+        		success: function() {
+        			model.model().set('activated', false);
+        		}
+        	});
         };
 	}
 
