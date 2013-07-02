@@ -1,0 +1,8 @@
+{"apps" : [{
+"title" :  {"en-US" : "Long Transaction Management", "pt-PT": "Gestão de Transações Longas"},
+"description" : {"en-US" : "Long Transaction Management", "pt-PT": "Gestão de Transações Longas"},
+"accessExpression" : "logged",
+"path" : "bennu-long-tx-ui/",
+"functionalities" : 
+		[]
+}]}
