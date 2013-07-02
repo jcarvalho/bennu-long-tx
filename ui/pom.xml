@@ -12,4 +12,12 @@
     <artifactId>bennu-long-tx-ui</artifactId>
     <name>Bennu Long TX UI</name>
 
+    <dependencies>
+    	<dependency>
+    		<groupId>pt.ist.bennu</groupId>
+    		<artifactId>bennu-knockout</artifactId>
+    		<version>1.0.0-SNAPSHOT</version>
+    	</dependency>
+    </dependencies>
+
 </project>
