@@ -24,7 +24,8 @@ public class TransactionalContextAdapter implements JsonCreator<TransactionalCon
         JsonObject json = new JsonObject();
         json.addProperty("id", context.getExternalId());
         json.addProperty("name", context.getName());
-        json.addProperty("selected", isSelected(context));
+        json.addProperty("activated", isSelected(context));
+        json.addProperty("state", context.getState().name());
         return json;
     }
 

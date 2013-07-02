@@ -7,7 +7,9 @@ define({
         "commit": "Confirmar",
         "rollback": "Anular",
         "activate": "Activar",
-        "deactivate": "Desactivar"
+        "deactivate": "Desactivar",
+        "state": "Estado",
+        "STARTED": "Iniciada"
     },
     'en-us': true
 });

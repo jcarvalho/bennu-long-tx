@@ -36,9 +36,6 @@ require(['knockout',
                 collection.sort();
                 var viewModel = new TransactionalContextViewModel(collection);
                 bennuKo.LoadPage(viewModel, 'LongTxManagement');
-            },
-            error: function(error) {
-                console.log(error);
             }
         });
 });

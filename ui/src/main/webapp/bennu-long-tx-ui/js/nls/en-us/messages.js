@@ -6,5 +6,7 @@ define({
     "commit": "Commit",
     "rollback": "Rollback",
     "activate": "Activate",
-    "deactivate": "Deactivate"
+    "deactivate": "Deactivate",
+    "state": "State",
+    "STARTED": "Started"
 });

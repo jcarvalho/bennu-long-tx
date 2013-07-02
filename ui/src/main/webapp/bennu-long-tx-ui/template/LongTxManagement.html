@@ -1,25 +1,26 @@
 <table class="table table-condensed table-stripped">
 	<thead>
 		<tr>
-			<th data-bind="i18n: 'description'"/>
+			<th data-bind="i18n: 'description'" />
+			<th data-bind="i18n: 'state'" />
 			<th data-bind="i18n: 'operations'" />
 		</tr>
 	</thead>
 	<tbody data-bind="foreach: transactions">
-		<tr data-bind="css: { success: selected }">
+		<tr data-bind="css: { success: activated }">
 			<td data-bind="text: name" />
+			<td data-bind="i18n: state" />
 			<td>
-				<button class="btn btn-success btn-mini" data-bind="i18n: 'commit', visible: !selected()" />
-				<button class="btn btn-danger btn-mini" data-bind="i18n: 'rollback', visible: !selected()" />
-				<button class="btn btn-info btn-mini" data-bind="i18n: 'activate', visible: !selected()" />
-				<button class="btn btn-warning btn-mini" data-bind="i18n: 'deactivate', visible: selected" />
+				<button class="btn btn-success btn-mini" data-bind="i18n: 'commit', visible: !activated(), click: $parent.commit" />
+				<button class="btn btn-danger btn-mini" data-bind="i18n: 'rollback', visible: !activated(), click: $parent.rollback" />
+				<button class="btn btn-info btn-mini" data-bind="i18n: 'activate', visible: !activated(), click: $parent.activate" />
+				<button class="btn btn-warning btn-mini" data-bind="i18n: 'deactivate', visible: activated, click: $parent.deactivate" />
 			</td>
 		</tr>
 	</tbody>
 </table>
 
 <a class="btn btn-primary btn-mini pull-right" href="#create" role="button" data-toggle="modal" data-bind="i18n: 'create'"></a>
-
 
 <!-- Modal -->
 
