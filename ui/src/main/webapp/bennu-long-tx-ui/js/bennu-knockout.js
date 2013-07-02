@@ -28,6 +28,9 @@ define(['jquery', 'knockout', 'i18n!nls/messages'], function($, ko, messages) {
 			$(element).append("<div id='bennu-ko-container'></div>");
 	    },
 	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+			if(!viewModel.template) {
+				viewModel = viewModel['_$bennuKo$_parent'];
+			}
 			var templateName = viewModel.template();
 			if(templateName) {
 				getTemplate(templateName, function(template) {
@@ -50,7 +53,12 @@ define(['jquery', 'knockout', 'i18n!nls/messages'], function($, ko, messages) {
 
 	ko.bindingHandlers.i18n = {
 	    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-			$(element).html(getMessage(valueAccessor()));
+			var value = valueAccessor();
+			if(typeof value === 'function') {
+				$(element).html(getMessage(value()));
+			} else {
+				$(element).html(getMessage(value));
+			}
 	    },
 	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
@@ -62,6 +70,7 @@ define(['jquery', 'knockout', 'i18n!nls/messages'], function($, ko, messages) {
 		'appName': appName,
 
 		LoadPage: function(viewModel, template) {
+			viewModel['_$bennuKo$_parent'] = templateModel;
 			templateModel.selectedViewModel(viewModel);
 			templateModel.template(template);
 		},
