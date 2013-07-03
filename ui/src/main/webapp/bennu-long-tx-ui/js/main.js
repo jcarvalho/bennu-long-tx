@@ -14,11 +14,6 @@ requirejs.config({
             deps: ["jquery", "underscore"],
             exports: "Backbone"
         },
-    }, 
-    config: {
-        i18n: {
-            'locale': BennuPortal.locale.tag.toLowerCase()
-        }
     }
 });
 
@@ -28,7 +23,6 @@ require(['knockout',
          'viewModels/TransactionalContextViewModel',
          'viewModels/NewTxViewModel'], function(ko, bennuKo, TrasactionalContextCollection, TransactionalContextViewModel, NewTxViewModel) {
 
-		bennuKo.initialize();
         var collection = new TrasactionalContextCollection();
         collection.fetch({
             success: function () {
