@@ -67,7 +67,7 @@ public class LongTxResource extends BennuRestResource {
         if (context == null) {
             return Response.serverError().build();
         }
-        request.getSession().setAttribute(LongTxFilter.LONG_TX_SESSION_PARAM, null);
+        request.getSession().removeAttribute(LongTxFilter.LONG_TX_SESSION_PARAM);
         return Response.ok().build();
     }
 
